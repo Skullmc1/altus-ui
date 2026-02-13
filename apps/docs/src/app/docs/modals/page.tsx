@@ -1,6 +1,6 @@
 "use client";
 
-import { CodeBlock, DocHeader, Preview } from "@/components/docs-ui";
+import { CodeBlock, DocHeader, Preview, DocFooter } from "@/components/docs-ui";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -16,48 +16,55 @@ export default function ModalsPage() {
 
       <section className="space-y-4">
         <h2 className="text-xl font-bold tracking-tight">Interactive Demo</h2>
+        <p className="opacity-70 text-sm">Modals in Altus UI use fixed positioning to break out of parent containers.</p>
         <Preview>
           <button className="btn-altus" onClick={() => setIsOpen(true)}>Open Perspective Modal</button>
 
           <AnimatePresence>
             {isOpen && (
-              <>
+              <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
                 <motion.div 
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="altus-overlay absolute inset-0 z-10" 
+                  className="altus-overlay absolute inset-0" 
                   onClick={() => setIsOpen(false)} 
                 />
                 <motion.div 
-                  initial={{ opacity: 0, y: "10%", scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: "5%", scale: 0.98 }}
+                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.98, y: 10 }}
                   transition={{ type: "spring", damping: 25, stiffness: 400 }}
-                  className="altus-modal absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-80"
+                  className="altus-modal relative w-full max-w-lg"
                 >
-                  <h3 className="font-bold text-lg mb-2">Confirmation</h3>
-                  <p className="text-sm opacity-60 mb-6">Are you sure you want to proceed with this action?</p>
-                  <div className="flex justify-end gap-2">
-                    <button className="btn-altus-outline text-xs py-2 px-3" onClick={() => setIsOpen(false)}>Cancel</button>
-                    <button className="btn-altus text-xs py-2 px-3" onClick={() => setIsOpen(false)}>Confirm</button>
+                  <h3 className="font-bold text-xl mb-3">System Perspective</h3>
+                  <p className="text-sm opacity-60 mb-8 leading-relaxed">
+                    This modal is rendered with fixed positioning, ensuring it remains visible regardless of parent overflow settings.
+                  </p>
+                  <div className="flex justify-end gap-3">
+                    <button className="btn-altus-outline px-6" onClick={() => setIsOpen(false)}>Dismiss</button>
+                    <button className="btn-altus px-6" onClick={() => setIsOpen(false)}>Accept</button>
                   </div>
                 </motion.div>
-              </>
+              </div>
             )}
           </AnimatePresence>
         </Preview>
-        <CodeBlock code={`<div className="altus-overlay" />
-<div className="altus-modal">
-  <h3>Title</h3>
-  <p>Content goes here...</p>
+        <CodeBlock code={`<div className="fixed inset-0 z-[100] flex items-center justify-center">
+  <div className="altus-overlay" />
+  <div className="altus-modal">
+    <h3>Modal Title</h3>
+    <p>Modal content...</p>
+  </div>
 </div>`} />
       </section>
 
-      <section className="space-y-4">
-        <h2 className="text-xl font-bold tracking-tight">Animation Strategy</h2>
-        <p className="opacity-70 text-sm">We recommend using <code>framer-motion</code> for the entrance and exit transitions to match the "kinetic" feel of the system.</p>
-      </section>
+      <DocFooter 
+        backHref="/docs/cards" 
+        backLabel="Cards & Layout"
+        nextHref="/docs/toasts" 
+        nextLabel="Toasts" 
+      />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { CodeBlock, DocHeader, Preview } from "@/components/docs-ui";
+import { CodeBlock, DocHeader, Preview, DocFooter } from "@/components/docs-ui";
 
 export default function ButtonsPage() {
   return (
@@ -27,25 +27,34 @@ export default function ButtonsPage() {
       <section className="space-y-4">
         <h2 className="text-xl font-bold tracking-tight">Icon Buttons</h2>
         <Preview>
-          <div className="flex gap-4">
-            <button className="btn-altus-icon">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>
-            </button>
-            <button className="btn-altus-fab">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-            </button>
-          </div>
+          <button className="btn-altus-icon">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>
+          </button>
         </Preview>
-        <CodeBlock code={`// Standard Icon Button
-<button className="btn-altus-icon">
-  <Icon />
-</button>
-
-// Floating Action Button
-<button className="btn-altus-fab">
+        <CodeBlock code={`<button className="btn-altus-icon">
   <Icon />
 </button>`} />
       </section>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-bold tracking-tight">FAB (Floating Action Button)</h2>
+        <p className="opacity-70 text-sm">High-visibility buttons for primary application actions.</p>
+        <Preview>
+          <button className="btn-altus-fab">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+          </button>
+        </Preview>
+        <CodeBlock code={`<button className="btn-altus-fab">
+  <Icon />
+</button>`} />
+      </section>
+
+      <DocFooter 
+        backHref="/docs/theming" 
+        backLabel="Theming"
+        nextHref="/docs/inputs" 
+        nextLabel="Inputs & Forms" 
+      />
     </div>
   );
 }

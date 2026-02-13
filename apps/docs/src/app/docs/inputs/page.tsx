@@ -1,6 +1,6 @@
 "use client";
 
-import { CodeBlock, DocHeader, Preview } from "@/components/docs-ui";
+import { CodeBlock, DocHeader, Preview, DocFooter } from "@/components/docs-ui";
 
 export default function InputsPage() {
   return (
@@ -65,6 +65,12 @@ export default function InputsPage() {
 // Switch
 <input type="checkbox" className="altus-switch" />`} />
       </section>
+      <DocFooter 
+        backHref="/docs/buttons" 
+        backLabel="Buttons"
+        nextHref="/docs/cards" 
+        nextLabel="Cards & Layout" 
+      />
     </div>
   );
 }

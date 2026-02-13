@@ -1,6 +1,6 @@
 "use client";
 
-import { CodeBlock, DocHeader, Preview } from "@/components/docs-ui";
+import { CodeBlock, DocHeader, Preview, DocFooter } from "@/components/docs-ui";
 
 export default function ThemingPage() {
   return (
@@ -56,6 +56,12 @@ export default function ThemingPage() {
   border-radius: var(--alt-radius);
 }`} language="css" />
       </section>
+      <DocFooter 
+        backHref="/docs/installation" 
+        backLabel="Installation"
+        nextHref="/docs/buttons" 
+        nextLabel="Buttons" 
+      />
     </div>
   );
 }

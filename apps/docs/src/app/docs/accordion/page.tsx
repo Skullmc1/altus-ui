@@ -1,6 +1,6 @@
 "use client";
 
-import { CodeBlock, DocHeader, Preview } from "@/components/docs-ui";
+import { CodeBlock, DocHeader, Preview, DocFooter } from "@/components/docs-ui";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -69,6 +69,11 @@ export default function AccordionPage() {
   </div>
 </div>`} />
       </section>
+
+      <DocFooter 
+        backHref="/docs/toasts" 
+        backLabel="Toasts"
+      />
     </div>
   );
 }

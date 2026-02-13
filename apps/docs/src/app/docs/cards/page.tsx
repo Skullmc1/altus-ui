@@ -1,6 +1,6 @@
 "use client";
 
-import { CodeBlock, DocHeader, Preview } from "@/components/docs-ui";
+import { CodeBlock, DocHeader, Preview, DocFooter } from "@/components/docs-ui";
 
 export default function CardsPage() {
   return (
@@ -36,6 +36,12 @@ export default function CardsPage() {
         </Preview>
         <CodeBlock code={`<div className="altus-divider" />`} />
       </section>
+      <DocFooter 
+        backHref="/docs/inputs" 
+        backLabel="Inputs & Forms"
+        nextHref="/docs/modals" 
+        nextLabel="Modals" 
+      />
     </div>
   );
 }

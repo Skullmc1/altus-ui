@@ -1,62 +1,93 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { CodeBlock, DocHeader, Preview, DocFooter } from "@/components/docs-ui";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+interface ToastItem {
+  id: number;
+  message: string;
+  type: "success" | "error" | "info";
+}
 
 export default function ToastsDocs() {
-  const codeBlock = (code: string) => (
-    <div className="bg-altus-muted/30 border border-altus-border rounded-altus p-4 my-4 font-mono text-sm overflow-x-auto">
-      <pre><code>{code}</code></pre>
-    </div>
-  );
+  const [toasts, setToasts] = useState<ToastItem[]>([]);
+
+  const addToast = (message: string, type: ToastItem["type"]) => {
+    const id = Date.now();
+    setToasts((prev) => {
+      if (prev.length >= 3) return [...prev.slice(1), { id, message, type }];
+      return [...prev, { id, message, type }];
+    });
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((t) => t.id !== id));
+    }, 5000);
+  };
+
+  const removeToast = (id: number) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  };
+
+  const toastVariants = {
+    initial: { opacity: 0, y: 20, scale: 0.9 },
+    animate: { opacity: 1, y: 0, scale: 1 },
+    exit: { opacity: 0, scale: 0.95, transition: { duration: 0.2 } }
+  };
 
   return (
-    <div className="space-y-10">
-      <header className="space-y-4">
-        <h1 className="text-4xl font-black tracking-tight uppercase">Toasts</h1>
-        <p className="text-xl text-altus-fg/60">Tactical feedback with built-in queue management and mobile responsiveness.</p>
-      </header>
+    <div className="space-y-10 relative">
+      <DocHeader 
+        title="Toasts" 
+        description="Tactical feedback with built-in queue management and mobile responsiveness." 
+      />
+
+      {/* Embedded Toast Container for Demo */}
+      <div className="fixed bottom-8 right-24 z-[100] flex flex-col gap-2 pointer-events-none">
+        <AnimatePresence mode="popLayout">
+          {toasts.map((t) => (
+            <motion.div
+              key={t.id}
+              layout
+              initial={toastVariants.initial}
+              animate={toastVariants.animate}
+              exit={toastVariants.exit}
+              className={`altus-toast altus-toast-${t.type} pointer-events-auto shadow-2xl`}
+            >
+              <span className="flex-1">{t.message}</span>
+              <button onClick={() => removeToast(t.id)} className="altus-toast-close">
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+              </button>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-bold tracking-tight">Interactive Demo</h2>
+        <p className="opacity-70 text-sm">Click the buttons below to trigger live notifications.</p>
+        <Preview>
+          <div className="flex flex-wrap gap-3">
+            <button onClick={() => addToast("Operation successful", "success")} className="btn-altus bg-emerald-600 border-emerald-700 hover:bg-emerald-700">Success</button>
+            <button onClick={() => addToast("An error occurred", "error")} className="btn-altus bg-rose-600 border-rose-700 hover:bg-rose-700">Error</button>
+            <button onClick={() => addToast("New system update", "info")} className="btn-altus bg-blue-600 border-blue-700 hover:bg-blue-700">Info</button>
+          </div>
+        </Preview>
+      </section>
 
       <section className="space-y-4">
         <h2 className="text-xl font-bold tracking-tight">Usage</h2>
-        <p className="opacity-70 text-sm">Altus UI toasts are designed to be used with animation libraries like Framer Motion for kinetic feedback.</p>
-        <div className="bg-altus-muted/30 border border-altus-border rounded-altus p-4 my-4 font-mono text-sm">
-          <pre><code>{`<div className="altus-toast altus-toast-success">
-  <svg className="w-4 h-4" ... />
-  Successfully synchronized
-  <button className="altus-toast-close">...</button>
-</div>`}</code></pre>
-        </div>
+        <CodeBlock code={`<div className="altus-toast altus-toast-success">
+  <span>Success message</span>
+  <button className="altus-toast-close">×</button>
+</div>`} />
       </section>
 
-      <section className="space-y-4">
-        <h2 className="text-xl font-bold tracking-tight">Variants</h2>
-        <div className="grid grid-cols-1 gap-4 mt-6">
-          <div className="altus-toast altus-toast-success border border-emerald-200">
-             <span className="w-4 h-4 rounded-full bg-emerald-500" /> Success Notification
-          </div>
-          <div className="altus-toast altus-toast-error border border-rose-200">
-             <span className="w-4 h-4 rounded-full bg-rose-500" /> Error Notification
-          </div>
-          <div className="altus-toast altus-toast-info border border-blue-200">
-             <span className="w-4 h-4 rounded-full bg-blue-500" /> Information Notification
-          </div>
-        </div>
-      </section>
-
-      <section className="space-y-4">
-        <h2 className="text-xl font-bold tracking-tight">Smart Queueing</h2>
-        <p className="opacity-70 text-sm">
-          To maintain visual clarity, the Altus system limits active toasts to 3 per stack. 
-          New notifications automatically push out the oldest entries.
-        </p>
-      </section>
-
-      <div className="altus-divider" />
-
-      <footer className="flex justify-between items-center">
-        <p className="text-xs opacity-40">Last updated: February 14, 2026</p>
-        <a href="/docs/installation" className="btn-altus-outline py-2 text-[10px] tracking-widest">← BACK: INSTALLATION</a>
-      </footer>
+      <DocFooter 
+        backHref="/docs/modals" 
+        backLabel="Modals"
+        nextHref="/docs/accordion" 
+        nextLabel="Accordion" 
+      />
     </div>
   );
 }
