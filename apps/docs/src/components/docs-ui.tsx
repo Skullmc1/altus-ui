@@ -38,27 +38,37 @@ export const DocFooter = ({
   nextHref?: string; 
   nextLabel?: string;
 }) => (
-  <footer className="mt-20 pt-10 border-t border-altus-border flex flex-col sm:flex-row justify-between items-center gap-6">
-    <div className="text-left">
-      {backHref && (
-        <Link href={backHref} className="group flex flex-col">
-          <span className="text-[10px] font-bold uppercase tracking-widest opacity-30 group-hover:opacity-50 transition-opacity">Previous</span>
-          <span className="text-sm font-bold text-altus-fg/70 group-hover:text-altus-primary transition-colors">← {backLabel}</span>
+  <footer className="mt-32 pb-20">
+    <div className="altus-divider mb-12 opacity-50" />
+    <div className="flex flex-col sm:flex-row justify-between items-stretch gap-4">
+      {backHref ? (
+        <Link 
+          href={backHref} 
+          className="flex-1 group p-6 rounded-altus border border-altus-border hover:border-altus-primary/40 hover:bg-altus-muted/10 transition-all"
+        >
+          <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-30 group-hover:opacity-50 transition-opacity block mb-2">Previous</span>
+          <span className="text-lg font-bold text-altus-fg/80 group-hover:text-altus-primary transition-colors flex items-center gap-2">
+            <svg className="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
+            {backLabel}
+          </span>
         </Link>
-      )}
-    </div>
-    
-    <div className="text-center sm:text-right">
-      {nextHref && (
-        <Link href={nextHref} className="group flex flex-col items-center sm:items-end">
-          <span className="text-[10px] font-bold uppercase tracking-widest opacity-30 group-hover:opacity-50 transition-opacity">Next Up</span>
-          <span className="text-sm font-bold text-altus-fg/70 group-hover:text-altus-primary transition-colors">{nextLabel} →</span>
+      ) : <div className="flex-1 hidden sm:block" />}
+      
+      {nextHref ? (
+        <Link 
+          href={nextHref} 
+          className="flex-1 group p-6 rounded-altus border border-altus-border hover:border-altus-primary/40 hover:bg-altus-muted/10 transition-all text-right"
+        >
+          <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-30 group-hover:opacity-50 transition-opacity block mb-2">Next Up</span>
+          <span className="text-lg font-bold text-altus-fg/80 group-hover:text-altus-primary transition-colors flex items-center gap-2 justify-end">
+            {nextLabel}
+            <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
+          </span>
         </Link>
-      )}
+      ) : <div className="flex-1 hidden sm:block" />}
     </div>
-
-    <div className="w-full sm:w-auto mt-4 sm:mt-0 text-center sm:absolute sm:left-1/2 sm:-translate-x-1/2">
-      <p className="text-[9px] font-bold uppercase tracking-[0.3em] opacity-20">Last Updated Feb 14, 2026</p>
+    <div className="mt-12 text-center">
+      <p className="text-[10px] font-bold uppercase tracking-[0.5em] opacity-20">Altus Design System / v0.0.1</p>
     </div>
   </footer>
 );
