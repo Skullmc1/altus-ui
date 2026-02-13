@@ -12,9 +12,9 @@ This document tracks the development of the Altus UI "Slick & Professional" comp
 ## 🔵 Actions & Basic Elements
 - [x] Primary Button (`btn-altus`)
 - [x] Outline Button (`btn-altus-outline`)
-- [ ] Ghost Button
-- [ ] Icon Button
-- [ ] Floating Action Button (FAB)
+- [x] Ghost Button
+- [x] Icon Button
+- [x] Floating Action Button (FAB)
 
 ## 🟠 Layout & Containers
 - [x] Professional Card (`altus-card`)
@@ -26,13 +26,13 @@ This document tracks the development of the Altus UI "Slick & Professional" comp
 ## 🟣 Form Elements
 - [x] Text Input (Slick variant)
 - [ ] Textarea
-- [ ] Checkbox & Radio
+- [x] Checkbox & Radio
 - [ ] Select / Dropdown
 - [ ] Input Group (with labels & hints)
 - [x] Segmented Control (Theme Switcher style)
 
 ## 🔴 Complex Components
-- [ ] Perspective Modal / Dialog
+- [x] Perspective Modal / Dialog
 - [ ] Navigation Overlay
 - [ ] Accordion / Disclosure
 - [ ] Tooltip (Soft shadow)
