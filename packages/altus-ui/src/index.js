@@ -190,6 +190,68 @@ module.exports = plugin(function({ addBase, addComponents, theme }) {
         'boxShadow': '0 0 0 4px var(--alt-ring), inset 0 1px 2px rgba(0,0,0,0.02)',
       }
     },
+    '.altus-select': {
+      'appearance': 'none',
+      'width': '100%',
+      'padding': '0.75rem 2.5rem 0.75rem 1.25rem',
+      'fontSize': '0.875rem',
+      'backgroundColor': 'var(--alt-bg)',
+      'color': 'var(--alt-fg)',
+      'border': '1px solid var(--alt-border)',
+      'borderRadius': 'var(--alt-radius)',
+      'cursor': 'pointer',
+      'backgroundImage': 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'currentColor\'%3E%3Cpath stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2\' d=\'M19 9l-7 7-7-7\' /%3E%3C/svg%3E")',
+      'backgroundRepeat': 'no-repeat',
+      'backgroundPosition': 'right 1rem center',
+      'backgroundSize': '1rem',
+      'transition': 'all 0.2s ease',
+      '&:focus': {
+        'borderColor': 'var(--alt-primary)',
+        'boxShadow': '0 0 0 4px var(--alt-ring)',
+        'outline': 'none',
+      }
+    },
+    '.altus-badge': {
+      'display': 'inline-flex',
+      'alignItems': 'center',
+      'padding': '0.25rem 0.625rem',
+      'fontSize': '10px',
+      'fontWeight': '700',
+      'textTransform': 'uppercase',
+      'letterSpacing': '0.1em',
+      'borderRadius': '9999px',
+      'backgroundColor': 'var(--alt-muted)',
+      'color': 'var(--alt-fg)',
+      'border': '1px solid var(--alt-border)',
+    },
+    '.altus-skeleton': {
+      'backgroundColor': 'var(--alt-muted)',
+      'borderRadius': 'var(--alt-radius)',
+      'position': 'relative',
+      'overflow': 'hidden',
+      '&::after': {
+        'content': '""',
+        'position': 'absolute',
+        'inset': '0',
+        'transform': 'translateX(-100%)',
+        'backgroundImage': 'linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent)',
+        'animation': 'altus-shimmer 2s infinite',
+      }
+    },
+    '.altus-spinner': {
+      'width': '1.5rem',
+      'height': '1.5rem',
+      'border': '2px solid var(--alt-muted)',
+      'borderTopColor': 'var(--alt-primary)',
+      'borderRadius': '50%',
+      'animation': 'altus-spin 0.8s linear infinite',
+    },
+    '@keyframes altus-shimmer': {
+      '100%': { 'transform': 'translateX(100%)' },
+    },
+    '@keyframes altus-spin': {
+      'to': { 'transform': 'rotate(360deg)' },
+    },
     '.altus-checkbox': {
       'appearance': 'none',
       'width': '1.25rem',
@@ -264,6 +326,59 @@ module.exports = plugin(function({ addBase, addComponents, theme }) {
       'color': 'var(--alt-fg)',
       'opacity': '0.8',
     },
+    '.altus-divider': {
+      'width': '100%',
+      'height': '1px',
+      'backgroundColor': 'var(--alt-border)',
+      'position': 'relative',
+      'margin': '2rem 0',
+      '&::before': {
+        'content': '""',
+        'position': 'absolute',
+        'left': '0',
+        'top': '-2px',
+        'width': '5px',
+        'height': '5px',
+        'borderRadius': '50%',
+        'backgroundColor': 'var(--alt-primary)',
+      }
+    },
+    '.altus-accordion': {
+      'border': '1px solid var(--alt-border)',
+      'borderRadius': 'var(--alt-radius)',
+      'backgroundColor': 'var(--alt-bg)',
+      'overflow': 'hidden',
+    },
+    '.altus-accordion-item': {
+      'borderBottom': '1px solid var(--alt-border)',
+      '&:last-child': {
+        'borderBottom': 'none',
+      }
+    },
+    '.altus-accordion-trigger': {
+      'width': '100%',
+      'padding': '1rem 1.5rem',
+      'display': 'flex',
+      'alignItems': 'center',
+      'justifyContent': 'space-between',
+      'textAlign': 'left',
+      'fontSize': '0.875rem',
+      'fontWeight': '600',
+      'backgroundColor': 'transparent',
+      'color': 'var(--alt-fg)',
+      'transition': 'all 0.2s ease',
+      'cursor': 'pointer',
+      '&:hover': {
+        'backgroundColor': 'var(--alt-muted)',
+      }
+    },
+    '.altus-accordion-content': {
+      'padding': '0 1.5rem 1.5rem',
+      'fontSize': '0.875rem',
+      'color': 'var(--alt-fg)',
+      'opacity': '0.7',
+      'lineHeight': '1.6',
+    },
     '.altus-tooltip': {
       'position': 'absolute',
       'zIndex': '50',
@@ -278,7 +393,6 @@ module.exports = plugin(function({ addBase, addComponents, theme }) {
       'boxShadow': 'var(--alt-shadow)',
       'pointerEvents': 'none',
       'whiteSpace': 'nowrap',
-      'animation': 'altus-tooltip-in 0.2s ease-out',
     },
     '.altus-overlay': {
       'position': 'fixed',
@@ -286,7 +400,6 @@ module.exports = plugin(function({ addBase, addComponents, theme }) {
       'backgroundColor': 'rgba(0,0,0,0.4)',
       'backdropFilter': 'blur(4px)',
       'zIndex': '100',
-      'animation': 'altus-fade-in 0.3s ease-out',
     },
     '.altus-modal': {
       'position': 'fixed',
@@ -301,7 +414,52 @@ module.exports = plugin(function({ addBase, addComponents, theme }) {
       'border': '1px solid var(--alt-border)',
       'boxShadow': '0 25px 50px -12px rgba(0,0,0,0.25)',
       'padding': '2rem',
-      'animation': 'altus-modal-in 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+    },
+    '.altus-toast': {
+      'padding': '0.75rem 1.25rem',
+      'backgroundColor': 'var(--alt-fg)',
+      'color': 'var(--alt-bg)',
+      'borderRadius': 'var(--alt-radius)',
+      'boxShadow': 'var(--alt-shadow)',
+      'fontSize': '0.875rem',
+      'fontWeight': '600',
+      'display': 'flex',
+      'alignItems': 'center',
+      'gap': '0.75rem',
+      'pointerEvents': 'auto',
+    },
+    '.altus-toast-container': {
+      'position': 'fixed',
+      'zIndex': '250',
+      'display': 'flex',
+      'flexDirection': 'column',
+      'gap': '0.5rem',
+      'pointerEvents': 'none',
+      'padding': '1.5rem',
+    },
+    '.altus-nav-overlay': {
+      'position': 'fixed',
+      'inset': '0',
+      'backgroundColor': 'var(--alt-bg)',
+      'zIndex': '200',
+      'padding': '6rem 2rem 2rem',
+      'display': 'flex',
+      'flexDirection': 'column',
+    },
+    '.altus-nav-link': {
+      'fontSize': '2.5rem',
+      'fontWeight': '900',
+      'textTransform': 'uppercase',
+      'letterSpacing': '-0.02em',
+      'color': 'var(--alt-fg)',
+      'transition': 'all 0.3s ease',
+      'display': 'block',
+      'borderBottom': '1px solid transparent',
+      'width': 'fit-content',
+      '&:hover': {
+        'letterSpacing': '0.05em',
+        'color': 'var(--alt-primary)',
+      }
     },
     '.altus-logo': {
       'height': '1.5rem',
@@ -312,18 +470,6 @@ module.exports = plugin(function({ addBase, addComponents, theme }) {
     '[data-theme="navy"] .altus-logo, [data-theme="obsidian"] .altus-logo, [data-theme="mocha"] .altus-logo': {
       'filter': 'invert(1)',
     },
-    '@keyframes altus-fade-in': {
-      'from': { 'opacity': '0' },
-      'to': { 'opacity': '1' },
-    },
-    '@keyframes altus-modal-in': {
-      'from': { 'opacity': '0', 'transform': 'translate(-50%, -48%) scale(0.96)' },
-      'to': { 'opacity': '1', 'transform': 'translate(-50%, -50%) scale(1)' },
-    },
-    '@keyframes altus-tooltip-in': {
-      'from': { 'opacity': '0', 'transform': 'translateY(4px) scale(0.95)' },
-      'to': { 'opacity': '1', 'transform': 'translateY(0) scale(1)' },
-    }
   });
 }, {
   theme: {

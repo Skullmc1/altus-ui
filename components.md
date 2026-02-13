@@ -19,7 +19,7 @@ This document tracks the development of the Altus UI "Slick & Professional" comp
 ## 🟠 Layout & Containers
 - [x] Professional Card (`altus-card`)
 - [x] Bento Grid System
-- [ ] Section Divider (Architectural Line)
+- [x] Section Divider (Architectural Line)
 - [ ] Aspect Ratio Containers
 - [ ] Sticky Navbar Template
 
@@ -27,20 +27,20 @@ This document tracks the development of the Altus UI "Slick & Professional" comp
 - [x] Text Input (Slick variant)
 - [ ] Textarea
 - [x] Checkbox & Radio
-- [ ] Select / Dropdown
+- [x] Select / Dropdown
 - [ ] Input Group (with labels & hints)
 - [x] Segmented Control (Theme Switcher style)
 
 ## 🔴 Complex Components
 - [x] Perspective Modal / Dialog
-- [ ] Navigation Overlay
-- [ ] Accordion / Disclosure
-- [ ] Tooltip (Soft shadow)
-- [ ] Toast Notifications
+- [x] Navigation Overlay
+- [x] Accordion / Disclosure
+- [x] Tooltip (Soft shadow)
+- [x] Toast Notifications
 - [ ] Project Slider (Carousel)
 
 ## ⚪ Feedback & Status
-- [ ] Badge / Tag
+- [x] Badge / Tag
 - [ ] Progress Bar (Minimalist)
-- [ ] Loading Spinner (Geometric)
-- [ ] Skeleton Loaders
+- [x] Loading Spinner (Geometric)
+- [x] Skeleton Loaders

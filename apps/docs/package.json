@@ -9,10 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "@altus-ui/core": "workspace:*",
+    "framer-motion": "^12.34.0",
     "next": "15.4.5",
-    "@altus-ui/core": "workspace:*"
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
   },
   "devDependencies": {
     "typescript": "^5",
