@@ -23,14 +23,14 @@ module.exports = plugin(function({ addBase, addComponents, theme }) {
       '--alt-ring': 'rgba(0,0,0,0.1)',
       '--alt-shadow': '0 4px 12px rgba(0,0,0,0.05)',
     },
-    /* Cherry Theme (Slick/Professional Dark Red) */
-    '[data-theme="cherry"]': {
-      '--alt-bg': '#1a0a0a',
-      '--alt-fg': '#fff5f5',
-      '--alt-muted': '#2d1515',
-      '--alt-border': '#4a1a1a',
-      '--alt-primary': '#f56565',
-      '--alt-ring': 'rgba(245,101,101,0.2)',
+    /* Mocha Theme (Warm/Professional Coffee Tones) */
+    '[data-theme="mocha"]': {
+      '--alt-bg': '#1c1917', /* Stone 900 */
+      '--alt-fg': '#fafaf9', /* Stone 50 */
+      '--alt-muted': '#292524', /* Stone 800 */
+      '--alt-border': '#44403c', /* Stone 700 */
+      '--alt-primary': '#d6d3d1', /* Stone 300 */
+      '--alt-ring': 'rgba(214,211,209,0.1)',
       '--alt-shadow': '0 10px 25px -5px rgba(0,0,0,0.4)',
     },
     /* Navy Theme */

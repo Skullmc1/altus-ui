@@ -41,7 +41,7 @@ export default function Home() {
         </div>
         
         <div className="flex bg-altus-muted p-1 rounded-lg border border-altus-border gap-1">
-          {["slate", "navy", "obsidian", "ivory", "cherry"].map((t) => (
+          {["slate", "navy", "obsidian", "ivory", "mocha"].map((t) => (
             <button
               key={t}
               onClick={() => handleSetTheme(t)}
