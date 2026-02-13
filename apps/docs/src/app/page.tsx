@@ -30,7 +30,7 @@ export default function Home() {
   if (!mounted) return null;
 
   return (
-    <div className="min-h-screen bg-altus-bg text-altus-fg selection:bg-altus-primary selection:text-altus-bg transition-colors duration-300">
+    <div className="min-h-screen bg-altus-bg text-altus-fg selection:bg-altus-primary selection:text-altus-bg transition-colors duration-300 pb-20">
       {/* Top Navbar */}
       <nav className="sticky top-0 z-50 bg-altus-bg/80 backdrop-blur-md border-b border-altus-border px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-3">
@@ -64,36 +64,92 @@ export default function Home() {
         </header>
 
         {/* Component Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
           {/* Buttons Section */}
-          <div className="col-span-1 md:col-span-2 lg:col-span-2 altus-card flex flex-col gap-6">
-            <header className="flex justify-between items-center">
-              <h2 className="text-sm font-semibold uppercase tracking-wider opacity-50">Buttons & Actions</h2>
-              <div className="flex gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-altus-primary" />
-                <div className="w-1.5 h-1.5 rounded-full bg-altus-border" />
-              </div>
+          <div className="lg:col-span-8 altus-card flex flex-col gap-6">
+            <header className="flex justify-between items-center border-b border-altus-border pb-4">
+              <h2 className="text-xs font-bold uppercase tracking-[0.2em] opacity-40">Buttons & Actions</h2>
             </header>
-            <div className="flex flex-wrap gap-4 py-8 items-center justify-center bg-altus-muted/30 rounded-altus border border-dashed border-altus-border">
+            <div className="flex flex-wrap gap-6 py-12 items-center justify-center bg-altus-muted/20 rounded-altus border border-altus-border/50">
               <button className="btn-altus">Primary Action</button>
               <button className="btn-altus-outline">Secondary Action</button>
-              <button className="text-sm font-medium hover:underline px-4 cursor-pointer">Ghost Button</button>
+              <button className="text-sm font-semibold hover:text-altus-primary transition-colors cursor-pointer">Ghost Action</button>
             </div>
           </div>
 
           {/* Theme Indicator Card */}
-          <div className="altus-card flex flex-col justify-between overflow-hidden relative group">
-            <h2 className="text-sm font-semibold uppercase tracking-wider opacity-50">Active Palette</h2>
+          <div className="lg:col-span-4 altus-card flex flex-col justify-between overflow-hidden relative group">
+            <h2 className="text-xs font-bold uppercase tracking-[0.2em] opacity-40">Active Palette</h2>
             <div className="mt-8">
               <p className="text-3xl font-bold capitalize">{currentTheme}</p>
-              <p className="text-sm opacity-60">Persistent Settings</p>
+              <p className="text-xs opacity-50 tracking-widest mt-1 uppercase">Persistent Instance</p>
             </div>
             <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-altus-primary/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700" />
           </div>
 
+          {/* Text and Forms Section */}
+          <div className="lg:col-span-12 altus-card flex flex-col gap-12">
+            <header className="border-b border-altus-border pb-6">
+              <h2 className="text-xs font-bold uppercase tracking-[0.2em] opacity-40 mb-2">Text And Forms</h2>
+              <p className="text-2xl font-bold">Input Precision</p>
+            </header>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+              {/* Text Inputs */}
+              <div className="md:col-span-2 space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-2">
+                    <label className="altus-label">Standard Input</label>
+                    <input type="text" className="altus-input" placeholder="Type something..." />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="altus-label">Focus State</label>
+                    <input type="text" className="altus-input" placeholder="Active input" autoFocus />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <label className="altus-label">Large Field</label>
+                  <textarea className="altus-input min-h-[120px] py-4" placeholder="Describe your creative process..." />
+                </div>
+              </div>
+
+              {/* Toggles & Checkboxes */}
+              <div className="space-y-10">
+                <div className="space-y-6 p-6 bg-altus-muted/20 rounded-altus border border-altus-border">
+                  <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] opacity-40">Selection Controls</h3>
+                  
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-semibold">Enable Feature</span>
+                    <input type="checkbox" className="altus-switch" defaultChecked />
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-semibold">System Sync</span>
+                    <input type="checkbox" className="altus-switch" />
+                  </div>
+
+                  <div className="pt-2 flex items-center gap-3">
+                    <input type="checkbox" className="altus-checkbox" defaultChecked />
+                    <span className="text-sm font-medium">Accept terms</span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <input type="checkbox" className="altus-checkbox" />
+                    <span className="text-sm font-medium">Newsletter</span>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <button className="btn-altus w-full">Apply Configuration</button>
+                  <p className="text-[10px] text-center opacity-40 uppercase tracking-widest">Changes apply instantly</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Card Styles */}
-          <div className="lg:col-span-1 altus-card flex flex-col gap-4">
+          <div className="lg:col-span-4 altus-card flex flex-col gap-4">
             <div className="w-12 h-12 bg-altus-muted rounded-altus border border-altus-border flex items-center justify-center">
               <svg className="w-6 h-6 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
             </div>
@@ -103,12 +159,12 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Interactive Block */}
-          <div className="lg:col-span-2 altus-card grid grid-cols-2 md:grid-cols-4 gap-4">
+          {/* Stats / Interactive Block */}
+          <div className="lg:col-span-8 altus-card grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { label: "Performance", value: "99%" },
               { label: "Components", value: "24+" },
-              { label: "Themes", value: "4" },
+              { label: "Themes", value: "5" },
               { label: "Bundle Size", value: "12kb" }
             ].map((stat, i) => (
               <div key={i} className="p-4 bg-altus-muted/50 rounded-altus border border-altus-border">
