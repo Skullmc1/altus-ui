@@ -25,7 +25,6 @@ This document tracks the development of the Altus UI "Slick & Professional" comp
 
 ## 🟣 Form Elements
 - [x] Text Input (Slick variant)
-- [ ] Textarea
 - [x] Checkbox & Radio
 - [x] Select / Dropdown
 - [ ] Input Group (with labels & hints)

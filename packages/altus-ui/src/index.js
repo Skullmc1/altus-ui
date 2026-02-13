@@ -416,7 +416,7 @@ module.exports = plugin(function({ addBase, addComponents, theme }) {
       'padding': '2rem',
     },
     '.altus-toast': {
-      'padding': '0.75rem 1.25rem',
+      'padding': '0.75rem 1rem',
       'backgroundColor': 'var(--alt-fg)',
       'color': 'var(--alt-bg)',
       'borderRadius': 'var(--alt-radius)',
@@ -427,6 +427,48 @@ module.exports = plugin(function({ addBase, addComponents, theme }) {
       'alignItems': 'center',
       'gap': '0.75rem',
       'pointerEvents': 'auto',
+      'border': '1px solid var(--alt-border)',
+      'minWidth': '300px',
+      'maxWidth': 'calc(100vw - 2rem)',
+      'position': 'relative',
+      'overflow': 'hidden',
+      '@media (max-width: 640px)': {
+        'minWidth': 'calc(100vw - 3rem)',
+      }
+    },
+    '.altus-toast-close': {
+      'marginLeft': 'auto',
+      'display': 'inline-flex',
+      'alignItems': 'center',
+      'justifyContent': 'center',
+      'width': '1.5rem',
+      'height': '1.5rem',
+      'borderRadius': '0.25rem',
+      'cursor': 'pointer',
+      'opacity': '0.5',
+      'transition': 'all 0.2s ease',
+      'border': 'none',
+      'backgroundColor': 'transparent',
+      'color': 'inherit',
+      '&:hover': {
+        'opacity': '1',
+        'backgroundColor': 'rgba(0,0,0,0.1)',
+      }
+    },
+    '.altus-toast-success': {
+      'backgroundColor': '#ecfdf5',
+      'color': '#065f46',
+      'borderColor': '#a7f3d0',
+    },
+    '.altus-toast-error': {
+      'backgroundColor': '#fef2f2',
+      'color': '#991b1b',
+      'borderColor': '#fecaca',
+    },
+    '.altus-toast-info': {
+      'backgroundColor': '#eff6ff',
+      'color': '#1e40af',
+      'borderColor': '#bfdbfe',
     },
     '.altus-toast-container': {
       'position': 'fixed',
@@ -435,7 +477,34 @@ module.exports = plugin(function({ addBase, addComponents, theme }) {
       'flexDirection': 'column',
       'gap': '0.5rem',
       'pointerEvents': 'none',
-      'padding': '1.5rem',
+      'padding': '1rem',
+      'width': '100%',
+      'maxWidth': 'max-content',
+      'alignItems': 'center',
+      '@media (max-width: 640px)': {
+        'left': '0 !important',
+        'right': '0 !important',
+        'width': '100% !important',
+        'maxWidth': '100% !important',
+        'transform': 'none !important',
+        'padding': '1rem',
+        'alignItems': 'center',
+      }
+    },
+    '.altus-toast-container.top-center': {
+      'top': '0',
+      'left': '50%',
+      'transform': 'translateX(-50%)',
+    },
+    '.altus-toast-container.bottom-center': {
+      'bottom': '0',
+      'left': '50%',
+      'transform': 'translateX(-50%)',
+    },
+    '.altus-toast-container.bottom-right': {
+      'bottom': '0',
+      'right': '0',
+      'alignItems': 'flex-end',
     },
     '.altus-nav-overlay': {
       'position': 'fixed',

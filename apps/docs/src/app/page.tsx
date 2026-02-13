@@ -13,15 +13,15 @@ function WithTooltip({ label, children, className = "" }: TooltipProps) {
   const [visible, setVisible] = useState(false);
 
   return (
-    <div 
-      className={`relative ${className}`} 
+    <div
+      className={`relative ${className}`}
       onMouseEnter={() => setVisible(true)}
       onMouseLeave={() => setVisible(false)}
     >
       {children}
       <AnimatePresence>
         {visible && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 4, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 2, scale: 0.98 }}
@@ -41,11 +41,11 @@ function AccordionItem({ title, children }: { title: string, children: ReactNode
     <div className="altus-accordion-item">
       <button className="altus-accordion-trigger" onClick={() => setIsOpen(!isOpen)}>
         <span>{title}</span>
-        <motion.svg 
+        <motion.svg
           animate={{ rotate: isOpen ? 180 : 0 }}
-          className="w-4 h-4" 
-          fill="none" 
-          stroke="currentColor" 
+          className="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
           viewBox="0 0 24 24"
         >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
@@ -53,7 +53,7 @@ function AccordionItem({ title, children }: { title: string, children: ReactNode
       </button>
       <AnimatePresence initial={false}>
         {isOpen && (
-          <motion.div 
+          <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 0.7 }}
             exit={{ height: 0, opacity: 0 }}
@@ -73,6 +73,7 @@ function AccordionItem({ title, children }: { title: string, children: ReactNode
 interface ToastItem {
   id: number;
   message: string;
+  type: "success" | "error" | "info";
   position: "top-center" | "bottom-right" | "bottom-center";
 }
 
@@ -104,26 +105,38 @@ export default function Home() {
     applyTheme(theme);
   };
 
-  const addToast = (message: string, position: ToastItem["position"]) => {
+  const addToast = (message: string, position: ToastItem["position"], type: ToastItem["type"] = "info") => {
     const id = Date.now();
-    setToasts((prev) => [...prev, { id, message, position }]);
+    setToasts((prev) => {
+      const atPosition = prev.filter(t => t.position === position);
+      if (atPosition.length >= 3) {
+        // Remove oldest toast from this position to prevent clogging
+        const oldestId = atPosition[0].id;
+        return [...prev.filter(t => t.id !== oldestId), { id, message, position, type }];
+      }
+      return [...prev, { id, message, position, type }];
+    });
     setTimeout(() => {
       setToasts((prev) => prev.filter((t) => t.id !== id));
-    }, 4000);
+    }, 5000);
+  };
+
+  const removeToast = (id: number) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
   };
 
   if (!mounted) return null;
 
   const toastVariants = {
     "top-center": {
-      initial: { opacity: 0, y: -20, x: "-50%" },
-      animate: { opacity: 1, y: 0, x: "-50%" },
-      exit: { opacity: 0, y: -10, scale: 0.95, x: "-50%" }
+      initial: { opacity: 0, y: -20 },
+      animate: { opacity: 1, y: 0 },
+      exit: { opacity: 0, y: -10, scale: 0.95 }
     },
     "bottom-center": {
-      initial: { opacity: 0, y: 20, x: "-50%" },
-      animate: { opacity: 1, y: 0, x: "-50%" },
-      exit: { opacity: 0, y: 10, scale: 0.95, x: "-50%" }
+      initial: { opacity: 0, y: 20 },
+      animate: { opacity: 1, y: 0 },
+      exit: { opacity: 0, y: 10, scale: 0.95 }
     },
     "bottom-right": {
       initial: { opacity: 0, x: 20 },
@@ -132,31 +145,43 @@ export default function Home() {
     }
   };
 
+  const toastIcons = {
+    success: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>,
+    error: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>,
+    info: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+  };
+
   const containers = {
-    "top-center": "top-0 left-1/2",
-    "bottom-center": "bottom-0 left-1/2",
-    "bottom-right": "bottom-0 right-0"
+    "top-center": "top-center",
+    "bottom-center": "bottom-center",
+    "bottom-right": "bottom-right"
   };
 
   return (
     <div className="min-h-screen bg-altus-bg text-altus-fg selection:bg-altus-primary selection:text-altus-bg transition-colors duration-300 pb-20">
-      
+
       {/* Toast Containers */}
       {(Object.keys(containers) as Array<keyof typeof containers>).map((pos) => (
         <div key={pos} className={`altus-toast-container ${containers[pos]}`}>
           <AnimatePresence mode="popLayout">
             {toasts.filter(t => t.position === pos).map(t => (
-              <motion.div 
+              <motion.div
                 key={t.id}
                 layout
                 initial={toastVariants[pos].initial}
                 animate={toastVariants[pos].animate}
                 exit={toastVariants[pos].exit}
                 transition={{ type: "spring", damping: 25, stiffness: 350 }}
-                className="altus-toast"
+                className={`altus-toast altus-toast-${t.type}`}
               >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                {t.message}
+                {toastIcons[t.type]}
+                <span className="flex-1">{t.message}</span>
+                <button 
+                  onClick={() => removeToast(t.id)}
+                  className="altus-toast-close"
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
               </motion.div>
             ))}
           </AnimatePresence>
@@ -166,14 +191,14 @@ export default function Home() {
       {/* Full Page Mobile Nav Overlay */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="altus-nav-overlay md:hidden"
           >
-            <button 
-              onClick={() => setIsMenuOpen(false)} 
+            <button
+              onClick={() => setIsMenuOpen(false)}
               className="absolute top-4 right-6 btn-altus-icon border-none scale-125"
             >
                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -181,12 +206,12 @@ export default function Home() {
 
             <div className="flex flex-col gap-6 mb-12">
               {["Components", "Showcase", "Resources", "GitHub"].map((link, i) => (
-                <motion.a 
+                <motion.a
                   key={link}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.1 + 0.2 }}
-                  href="#" 
+                  href="#"
                   className="altus-nav-link"
                 >
                   {link}
@@ -194,7 +219,7 @@ export default function Home() {
               ))}
             </div>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
@@ -223,14 +248,14 @@ export default function Home() {
       <AnimatePresence>
         {isModalOpen && (
           <>
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="altus-overlay" 
-              onClick={() => setIsModalOpen(false)} 
+              className="altus-overlay"
+              onClick={() => setIsModalOpen(false)}
             />
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: "-45%", x: "-50%", scale: 0.95 }}
               animate={{ opacity: 1, y: "-50%", x: "-50%", scale: 1 }}
               exit={{ opacity: 0, y: "-48%", x: "-50%", scale: 0.98 }}
@@ -302,7 +327,7 @@ export default function Home() {
         <header className="relative mb-24">
           <div className="absolute -left-12 top-0 bottom-0 w-[1px] bg-gradient-to-b from-altus-primary/20 via-transparent to-transparent hidden xl:block" />
           <div className="space-y-8">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-altus-primary/5 border border-altus-primary/10 text-[10px] font-bold tracking-[0.2em] text-altus-primary uppercase"
@@ -313,23 +338,23 @@ export default function Home() {
               </span>
               Slick Kinetic Motion
             </motion.div>
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-[clamp(2.5rem,8vw,5.5rem)] font-black tracking-tight leading-[0.9] uppercase"
             >
-              Constructing <br /> 
+              Constructing <br />
               <span className="text-altus-primary italic">Digital Excellence.</span>
             </motion.h1>
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
               className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end"
             >
               <p className="text-altus-fg/50 text-xl font-medium leading-tight tracking-tight">
-                A high-precision design system meticulously crafted for 
-                <span className="text-altus-fg"> creative portfolios </span> 
+                A high-precision design system meticulously crafted for
+                <span className="text-altus-fg"> creative portfolios </span>
                 and performance-critical interfaces.
               </p>
               <div className="flex gap-4">
@@ -347,7 +372,7 @@ export default function Home() {
 
         {/* Component Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          
+
           {/* Modal & Toast Section */}
           <div className="lg:col-span-12 altus-card grid grid-cols-1 md:grid-cols-2 gap-12">
             <div className="space-y-6">
@@ -363,14 +388,14 @@ export default function Home() {
             <div className="space-y-4">
               <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] opacity-40">Tactical Feedback</h3>
               <div className="grid grid-cols-1 gap-3">
-                <button onClick={() => addToast("System Notification (Top)", "top-center")} className="btn-altus-outline text-xs justify-start px-4 hover:bg-altus-muted transition-colors">
-                   Trigger Top Center
+                <button onClick={() => addToast("Successfully synchronized with server", "top-center", "success")} className="btn-altus-outline text-xs justify-start px-4 hover:bg-altus-muted transition-colors">
+                   <span className="w-2 h-2 rounded-full bg-emerald-500 mr-2" /> Trigger Success (Top)
                 </button>
-                <button onClick={() => addToast("Sync Complete (Bottom)", "bottom-center")} className="btn-altus-outline text-xs justify-start px-4 hover:bg-altus-muted transition-colors">
-                   Trigger Bottom Center
+                <button onClick={() => addToast("Critical system failure detected", "bottom-center", "error")} className="btn-altus-outline text-xs justify-start px-4 hover:bg-altus-muted transition-colors">
+                   <span className="w-2 h-2 rounded-full bg-rose-500 mr-2" /> Trigger Error (Bottom)
                 </button>
-                <button onClick={() => addToast("Task Finalized (Right)", "bottom-right")} className="btn-altus-outline text-xs justify-start px-4 hover:bg-altus-muted transition-colors">
-                   Trigger Bottom Right
+                <button onClick={() => addToast("New update available for Altus UI", "bottom-right", "info")} className="btn-altus-outline text-xs justify-start px-4 hover:bg-altus-muted transition-colors">
+                   <span className="w-2 h-2 rounded-full bg-blue-500 mr-2" /> Trigger Info (Right)
                 </button>
               </div>
             </div>
@@ -455,7 +480,7 @@ export default function Home() {
             <header className="border-b border-altus-border pb-4">
               <h2 className="text-xs font-bold uppercase tracking-[0.2em] opacity-40">Feedback & Utility</h2>
             </header>
-            
+
             <div className="space-y-8">
               <div className="space-y-3">
                 <label className="altus-label">Skeleton States</label>
