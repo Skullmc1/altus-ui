@@ -49,6 +49,12 @@ export default function ButtonsPage() {
 </button>`} />
       </section>
 
+      <section className="space-y-4">
+        <h2 className="text-xl font-bold tracking-tight">Scaffold via CLI</h2>
+        <p className="opacity-70 text-sm">Rapidly add the button component to your project using the Altus CLI.</p>
+        <CodeBlock code={`bun x @altus-ui/cli add button`} />
+      </section>
+
       <DocFooter 
         backHref="/docs/theming" 
         backLabel="Theming"

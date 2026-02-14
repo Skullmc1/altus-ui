@@ -104,7 +104,7 @@ cli
       return;
     }
 
-    const availableComponents = ['button'];
+    const availableComponents = ['button', 'input', 'navbar', 'progress', 'carousel', 'breadcrumbs', 'card', 'modal', 'toast', 'accordion'];
     if (!availableComponents.includes(component.toLowerCase())) {
       console.log(pc.red(`Component "${component}" not found.`));
       console.log(pc.dim(`Available components: ${availableComponents.join(', ')}`));

@@ -119,6 +119,12 @@ export default function ToastsDocs() {
 </div>`} />
       </section>
 
+      <section className="space-y-4">
+        <h2 className="text-xl font-bold tracking-tight">Scaffold via CLI</h2>
+        <p className="opacity-70 text-sm">Add the toast notification system to your codebase.</p>
+        <CodeBlock code={`bun x @altus-ui/cli add toast`} />
+      </section>
+
       <DocFooter 
         backHref="/docs/modals" 
         backLabel="Modals"

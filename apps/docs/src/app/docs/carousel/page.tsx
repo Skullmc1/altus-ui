@@ -38,6 +38,12 @@ export default function CarouselPage() {
 </div>`} />
       </section>
 
+      <section className="space-y-4">
+        <h2 className="text-xl font-bold tracking-tight">Scaffold via CLI</h2>
+        <p className="opacity-70 text-sm">Add the kinetic project slider to your application.</p>
+        <CodeBlock code={`bun x @altus-ui/cli add carousel`} />
+      </section>
+
       <DocFooter 
         backHref="/docs/progress" 
         backLabel="Progress Indicators"

@@ -37,6 +37,12 @@ export default function BreadcrumbsPage() {
 </ul>`} />
       </section>
 
+      <section className="space-y-4">
+        <h2 className="text-xl font-bold tracking-tight">Scaffold via CLI</h2>
+        <p className="opacity-70 text-sm">Add professional navigation trails to your application.</p>
+        <CodeBlock code={`bun x @altus-ui/cli add breadcrumbs`} />
+      </section>
+
       <DocFooter 
         backHref="/docs/carousel" 
         backLabel="Carousel / Slider"

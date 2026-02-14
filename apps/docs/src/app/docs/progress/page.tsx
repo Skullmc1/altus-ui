@@ -56,6 +56,12 @@ export default function ProgressPage() {
 </div>`} />
       </section>
 
+      <section className="space-y-4">
+        <h2 className="text-xl font-bold tracking-tight">Scaffold via CLI</h2>
+        <p className="opacity-70 text-sm">Add linear and circular progress indicators to your project.</p>
+        <CodeBlock code={`bun x @altus-ui/cli add progress`} />
+      </section>
+
       <DocFooter 
         backHref="/docs/navbar" 
         backLabel="Sticky Navbar"

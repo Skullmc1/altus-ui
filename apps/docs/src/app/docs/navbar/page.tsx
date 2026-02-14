@@ -53,6 +53,12 @@ export default function NavbarPage() {
 </nav>`} />
       </section>
 
+      <section className="space-y-4">
+        <h2 className="text-xl font-bold tracking-tight">Scaffold via CLI</h2>
+        <p className="opacity-70 text-sm">Add the glass-morphism enabled sticky navbar to your project.</p>
+        <CodeBlock code={`bun x @altus-ui/cli add navbar`} />
+      </section>
+
       <DocFooter 
         backHref="/docs/inputs" 
         backLabel="Inputs & Forms"
