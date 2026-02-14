@@ -188,7 +188,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-3">
-              <img src="/logo.png" alt="Altus Logo" className="altus-logo" />
+              <img src="/logo.svg" alt="Altus Logo" className="altus-logo w-8 h-8" />
               <span className="font-bold tracking-tighter text-lg">ALTUS</span>
             </div>
             <div className="hidden lg:flex items-center gap-1 h-4 bg-altus-border w-[1px] mx-2" />
