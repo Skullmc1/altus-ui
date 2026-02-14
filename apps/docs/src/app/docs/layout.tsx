@@ -103,7 +103,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
       {/* Mobile Header */}
       <header className="md:hidden sticky top-0 z-40 bg-altus-bg/80 backdrop-blur-md border-b border-altus-border px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <img src="/logo.png" alt="Altus Logo" className="altus-logo w-5" />
+          <img src="/favicon/favicon.svg" alt="Altus Logo" className="altus-logo w-8 h-8" />
           <span className="font-bold tracking-tighter text-base">ALTUS</span>
         </div>
         <button 
@@ -120,7 +120,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
         {/* Desktop Sidebar */}
         <aside className="hidden md:block w-72 border-r border-altus-border p-8 sticky top-0 h-screen overflow-y-auto bg-altus-bg/20 backdrop-blur-sm">
           <div className="flex items-center gap-3 mb-12">
-            <img src="/logo.png" alt="Altus Logo" className="altus-logo w-6" />
+            <img src="/favicon/favicon.svg" alt="Altus Logo" className="altus-logo w-8 h-8" />
             <Link href="/" className="font-black tracking-tighter text-xl">ALTUS</Link>
           </div>
           <NavContent />
@@ -146,7 +146,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
               >
                 <div className="flex items-center justify-between mb-12">
                   <div className="flex items-center gap-3">
-                    <img src="/logo.png" alt="Altus Logo" className="altus-logo w-6" />
+                    <img src="/favicon/favicon.svg" alt="Altus Logo" className="altus-logo w-8 h-8" />
                     <span className="font-black tracking-tighter text-xl">ALTUS</span>
                   </div>
                   <button onClick={() => setIsSidebarOpen(false)} className="opacity-40"><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
