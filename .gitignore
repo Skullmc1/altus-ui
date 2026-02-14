@@ -5,7 +5,7 @@ node_modules/
 .changeset/
 # testing
 coverage/
-
+roadmap.md
 # next.js
 .next/
 out/
