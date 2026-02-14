@@ -1,8 +1,31 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { CodeBlock, DocHeader, Preview, DocFooter } from "@/components/docs-ui";
 
 export default function CarouselPage() {
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
+
+  useEffect(() => {
+    const calculateConstraints = () => {
+      if (carouselRef.current) {
+        const containerWidth = carouselRef.current.offsetWidth;
+        const contentWidth = carouselRef.current.scrollWidth;
+        setDragConstraints({ left: -(contentWidth - containerWidth + 48), right: 0 });
+      }
+    };
+
+    calculateConstraints();
+    const timer = setTimeout(calculateConstraints, 100);
+    window.addEventListener("resize", calculateConstraints);
+    return () => {
+      window.removeEventListener("resize", calculateConstraints);
+      clearTimeout(timer);
+    };
+  }, []);
+
   return (
     <div className="space-y-10">
       <DocHeader 
@@ -12,29 +35,49 @@ export default function CarouselPage() {
 
       <section className="space-y-4">
         <h2 className="text-xl font-bold tracking-tight">Kinetic Slider</h2>
-        <p className="opacity-70 text-sm">A native-feeling horizontal scroller with scroll-snapping and sleek interactions.</p>
-        <Preview className="!p-0 !items-start">
-          <div className="altus-slider px-8">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <div key={i} className="altus-slider-item">
-                <div className="aspect-video bg-altus-muted rounded-altus flex items-center justify-center border border-altus-border overflow-hidden group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-altus-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <span className="text-4xl font-black opacity-10">0{i}</span>
-                </div>
-                <div className="mt-4">
-                  <h3 className="font-bold">Project Alpha {i}</h3>
-                  <p className="text-xs opacity-50 uppercase tracking-widest font-semibold mt-1">Industrial Design / 2026</p>
-                </div>
-              </div>
-            ))}
+        <p className="opacity-70 text-sm">A native-feeling horizontal scroller with draggable physics and sleek interactions.</p>
+        
+        <div className="border border-altus-border rounded-altus bg-altus-bg relative overflow-hidden">
+          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-altus-bg to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-altus-bg to-transparent z-10 pointer-events-none" />
+          
+          <div ref={carouselRef} className="overflow-hidden px-8">
+            <motion.div 
+              className="flex gap-6 py-12 cursor-grab active:cursor-grabbing w-max"
+              drag="x"
+              dragConstraints={dragConstraints}
+              dragElastic={0.1}
+              dragMomentum={true}
+            >
+              {[1, 2, 3, 4, 5].map(i => (
+                <motion.div 
+                  key={i} 
+                  className="flex-none w-[300px] space-y-4"
+                  whileHover={{ y: -5 }}
+                >
+                  <div className="aspect-[16/10] bg-altus-muted rounded-2xl border border-altus-border flex items-center justify-center overflow-hidden relative group/item">
+                    <div className="absolute inset-0 bg-altus-primary/5 opacity-0 group-hover/item:opacity-100 transition-opacity" />
+                    <span className="text-5xl font-black opacity-5">0{i}</span>
+                  </div>
+                  <div className="px-1 flex justify-between items-center">
+                    <h4 className="font-bold text-sm tracking-tight">Project Node {i}</h4>
+                    <span className="altus-badge !text-[8px] !px-2">2026</span>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
-        </Preview>
-        <CodeBlock code={`<div className="altus-slider">
-  <div className="altus-slider-item">
-    <div className="aspect-video bg-altus-muted rounded-altus">...</div>
-    <h3>Project Name</h3>
-  </div>
-  {/* More items */}
+        </div>
+
+        <CodeBlock code={`<div ref={containerRef} className="overflow-hidden">
+  <motion.div 
+    drag="x" 
+    dragConstraints={{ left: -1200, right: 0 }}
+    className="flex gap-8"
+  >
+    <div className="flex-none w-[400px]">...</div>
+    {/* More items */}
+  </motion.div>
 </div>`} />
       </section>
 

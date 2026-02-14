@@ -68,7 +68,7 @@ export const DocFooter = ({
       ) : <div className="flex-1 hidden sm:block" />}
     </div>
     <div className="mt-12 text-center">
-      <p className="text-[10px] font-bold uppercase tracking-[0.5em] opacity-20">Altus Design System / v0.0.1</p>
+      <p className="text-[10px] font-bold uppercase tracking-[0.5em] opacity-20">Altus Design System / v1.0.0</p>
     </div>
   </footer>
 );

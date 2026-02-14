@@ -177,7 +177,7 @@ export default function Home() {
               <span className="font-bold tracking-tighter text-lg">ALTUS</span>
             </div>
             <div className="hidden lg:flex items-center gap-1 h-4 bg-altus-border w-[1px] mx-2" />
-            <span className="hidden lg:inline text-[10px] font-bold uppercase tracking-[0.3em] opacity-30">V0.0.1 ALPHA</span>
+            <span className="hidden lg:inline text-[10px] font-bold uppercase tracking-[0.3em] opacity-30">V1.0.0</span>
           </div>
 
           <div className="flex items-center gap-4">
@@ -217,7 +217,7 @@ export default function Home() {
       </main>
 
       <footer className="mt-20 border-t border-altus-border p-12 text-center">
-        <p className="text-xs uppercase tracking-[0.4em] opacity-30">Altus Design System / v0.0.1</p>
+        <p className="text-xs uppercase tracking-[0.4em] opacity-30">Altus Design System / v1.0.0</p>
       </footer>
     </div>
   );
