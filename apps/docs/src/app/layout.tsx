@@ -18,6 +18,14 @@ export const metadata: Metadata = {
     ],
   },
   manifest: "/favicon/site.webmanifest",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://altus-ui.com",
+    siteName: "Altus UI",
+    title: "Altus UI | Professional Component Suite",
+    description: "A slick, multi-themed design system for premium creative portfolios.",
+  },
 };
 
 export default function RootLayout({
