@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     title: "Altus UI | Professional Component Suite",
     description: "A slick, multi-themed design system for premium creative portfolios.",
   },
+  appleWebApp: {
+    title: "Altus UI",
+  },
 };
 
 export default function RootLayout({
