@@ -39,7 +39,7 @@ We are actively developing new components and refining existing ones. You can tr
 
 ## 🤝 Contributing
 
-This project is currently in Alpha. If you encounter any issues or have suggestions for new "slick" components, please refer to the documents above before submitting a PR.
+This project is currently in Alpha. If you encounter any issues or have suggestions for new components, please refer to the documents above before submitting a PR.
 
 ---
 
